@@ -1,27 +1,22 @@
-// class Weather {
-//   final String cityName;
-//   final double tempCelcius;
-//   final String date;
-
-//   Weather({
-//     required this.cityName,
-//     required this.tempCelcius,
-//     required this.date,//localtime
-//   });
-
-//   factory Weather.fromJson(Map<String, dynamic> json) {
-//     return Weather(cityName: json['name'], tempCelcius: json['feelslike_c']);
-//   }
-// }
-
 class Weather {
   final String cityName;
+  final double tempCelcius;
+  final String date;
+  final String icon;
 
   Weather({
     required this.cityName,
+    required this.tempCelcius,
+    required this.date,
+    required this.icon,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) {
-    return Weather(cityName: json['location']['name']);
+    return Weather(
+      cityName: json['location']['name'],
+      tempCelcius: json['current']['feelslike_c'],
+      date: json['location']['localtime'],
+      icon: json['current']['condition']['icon'],
+    );
   }
 }

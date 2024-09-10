@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waestro_mobile/services/weather_service.dart';
 import 'package:waestro_mobile/models/weather_model.dart';
+import 'package:waestro_mobile/components/weather_search_bar.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -20,12 +21,12 @@ class _WeatherPageState extends State<WeatherPage> {
 
     try {
       final weather = await _weatherService.getWeather("Paris");
-      
+
       setState(() {
         _weather = weather;
       });
     } catch (e) {
-      print(e);
+      print("Error fetching weather: $e");
     }
   }
 
@@ -38,7 +39,32 @@ class _WeatherPageState extends State<WeatherPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [Text(_weather?.cityName ?? "loading")]),
-    );
+        body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          LocationSearchBar(weatherService: _weatherService),
+          if (_weather != null)
+            Column(
+              children: <Widget>[
+                Text(
+                  '${_weather!.cityName}',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '${_weather!.tempCelcius}°C',
+                  style: TextStyle(fontSize: 24),
+                ),
+                Image.network('https:${_weather!.icon}'),
+                Text(
+                  '${_weather!.date}',
+                  style: TextStyle(fontSize: 24),
+                ),
+              ],
+            ),
+          if (_weather == null) CircularProgressIndicator(),
+        ],
+      ),
+    ));
   }
 }
