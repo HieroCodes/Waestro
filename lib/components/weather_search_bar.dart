@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:waestro_mobile/pages/waether_result_page.dart';
 import 'package:waestro_mobile/services/weather_service.dart';
-import 'package:waestro_mobile/pages/waether_result_page.dart'; // Import de la nouvelle page
+import 'package:waestro_mobile/models/weather_model.dart'; // Import du modèle Weather
 
 class LocationSearchBar extends StatefulWidget {
   final WeatherService weatherService;
@@ -14,18 +15,44 @@ class LocationSearchBar extends StatefulWidget {
 class _LocationSearchBarState extends State<LocationSearchBar> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _textController = TextEditingController();
+  bool _isLoading = false; // Indicateur de chargement
 
-  // Fonction pour naviguer vers la page des résultats météo
-  void _navigateToWeatherResults(String cityName) {
+  // Fonction pour naviguer vers la page des résultats météo avec l'objet Weather
+  void _navigateToWeatherResults(Weather weather) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => WeatherResultPage(
-          cityName: cityName,
-          weatherService: widget.weatherService, // Passez WeatherService
-        ),
+        builder: (context) => WeatherResultPage(weather: weather),
       ),
     );
+  }
+
+  // Fonction pour récupérer les données météo à partir de la ville entrée
+  Future<void> _fetchWeather() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      try {
+        String cityName = _textController.text;
+        Weather weather = await widget.weatherService.getWeather(cityName); // Appel à WeatherService
+
+        setState(() {
+          _isLoading = false;
+        });
+
+        _navigateToWeatherResults(weather); // Naviguer avec l'objet Weather
+      } catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erreur lors de la récupération des données météo')),
+        );
+      }
+    }
   }
 
   @override
@@ -52,13 +79,8 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  String cityName = _textController.text;
-                  _navigateToWeatherResults(cityName); // Naviguer vers la nouvelle page
-                }
-              },
-              child: Text('Rechercher'),
+              onPressed: _isLoading ? null : _fetchWeather, // Désactivez le bouton lors du chargement
+              child: _isLoading ? CircularProgressIndicator(color: Colors.white) : Text('Rechercher'),
             ),
           ],
         ),

@@ -52,7 +52,7 @@ class _WeatherPageState extends State<WeatherPage> {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '${_weather!.tempCelcius}°C',
+                  '${_weather!.temp}°C',
                   style: TextStyle(fontSize: 24),
                 ),
                 Image.network('https:${_weather!.icon}'),

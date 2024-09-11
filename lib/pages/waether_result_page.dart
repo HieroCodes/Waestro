@@ -1,38 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:waestro_mobile/services/weather_service.dart';
 import 'package:waestro_mobile/models/weather_model.dart';
 
 class WeatherResultPage extends StatelessWidget {
-  final String cityName;
-  final WeatherService weatherService;
+  final Weather weather;
 
-  WeatherResultPage({required this.cityName, required this.weatherService});
+  WeatherResultPage({required this.weather});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Météo pour $cityName'),
+        title: Text('Météo pour ${weather.cityName}'),
       ),
-      body: FutureBuilder<Weather>(
-        future: weatherService.getWeather(cityName),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Erreur: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            final weather = snapshot.data!;
-            return Center(
-              child: Text(
-                'Température actuelle: test °C',
-                style: TextStyle(fontSize: 24),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Température actuelle : ${weather.temp}°C',
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              'Ressenti : ${weather.feelslike}°C',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Prévisions :',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: weather.days.length,
+                itemBuilder: (context, index) {
+                  final day = weather.days[index];
+                  return Card(
+                    child: ListTile(
+                      title: Text(
+                        '${day.date.toLocal()} - Max: ${day.maxTemp}°C, Min: ${day.minTemp}°C',
+                      ),
+                      subtitle: Text('Condition : ${day.condition}'),
+                    ),
+                  );
+                },
               ),
-            );
-          } else {
-            return Center(child: Text('Aucune donnée disponible'));
-          }
-        },
+            ),
+          ],
+        ),
       ),
     );
   }
