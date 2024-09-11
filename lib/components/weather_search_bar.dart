@@ -64,25 +64,53 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFormField(
-              controller: _textController,
-              decoration: InputDecoration(
-                labelText: 'Entrez une ville',
-                border: OutlineInputBorder(),
+              Text(
+                'Trouver une localisation', // Texte au-dessus de l'input
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 44,
+                  fontWeight: FontWeight.bold
+                ),
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Ce champ ne peut pas être vide';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _isLoading ? null : _fetchWeather, // Désactivez le bouton lors du chargement
-              child: _isLoading ? CircularProgressIndicator(color: Colors.white) : Text('Rechercher'),
-            ),
-          ],
+              SizedBox(height: 20),
+              // Input field
+              TextFormField(
+                controller: _textController,
+                style: TextStyle(color: Colors.white), // Texte blanc
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey[850], // Couleur de fond du champ
+                  prefixIcon: Icon(Icons.search, color: Colors.tealAccent), // Icône de recherche
+                  hintText: 'latitude, longitude', // Placeholder
+                  hintStyle: TextStyle(color: Colors.white38), // Couleur du placeholder
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30), // Arrondir les coins
+                    borderSide: BorderSide.none, // Pas de bordure
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Ce champ ne peut pas être vide';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20),
+              // Bouton coller et lancer
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent, // Fond transparent
+                    elevation: 0, // Pas d'ombre
+                    textStyle: TextStyle(fontSize: 16),
+                    foregroundColor: Colors.tealAccent, // Couleur du texte
+                  ),
+                  onPressed: _isLoading ? null : _fetchWeather,
+                  child: Text('Rechercher'),
+                ),
+              ),
+              SizedBox(height: 20),],
         ),
       ),
     );
