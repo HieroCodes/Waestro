@@ -8,6 +8,7 @@ class Hour {
   final String condition;
   final int humidity;
   final int cloud;
+  final bool isDay;
 
   Hour({
     required this.time,
@@ -19,6 +20,7 @@ class Hour {
     required this.windSpeed,
     required this.humidity,
     required this.cloud,
+    required this.isDay,
   });
 
   factory Hour.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,7 @@ class Hour {
       windSpeed: json['wind_kph'],
       humidity: json['humidity'],
       cloud: json['cloud'],
+      isDay: json['is_day'] == 1,
     );
   }
 }
