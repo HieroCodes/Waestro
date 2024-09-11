@@ -10,7 +10,7 @@ class AppStyle {
 
   // Text styles
   static const TextStyle cityNameStyle = TextStyle(
-    fontSize: 28,
+    fontSize: 36,
     fontWeight: FontWeight.bold,
     color: primaryTextColor,
   );
@@ -22,13 +22,13 @@ class AppStyle {
   );
 
   static const TextStyle realFeelStyle = TextStyle(
-    fontSize: 16,
-    color: secondaryTextColor,
+    fontSize: 20,
+    color: primaryTextColor,
   );
 
   static const TextStyle dateStyle = TextStyle(
-    fontSize: 16,
-    color: secondaryTextColor,
+    fontSize: 20,
+    color: primaryTextColor,
   );
 
   static const TextStyle dayTitleStyle = TextStyle(

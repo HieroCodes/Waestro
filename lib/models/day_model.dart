@@ -6,7 +6,7 @@ class Day {
   final DateTime date;
   final double maxTemp;
   final double minTemp;
-  final String condition;
+  final String icon;
   final String moonPhase;
   final List<Hour> hours;
 
@@ -14,7 +14,7 @@ class Day {
     required this.date,
     required this.maxTemp,
     required this.minTemp,
-    required this.condition,
+    required this.icon,
     required this.moonPhase,
     required this.hours,
   });
@@ -27,7 +27,7 @@ class Day {
       date: DateTime.parse(json['date']),
       maxTemp: json['day']['maxtemp_c'],
       minTemp: json['day']['mintemp_c'],
-      condition: json['day']['condition']['text'],
+      icon: json['day']['condition']['icon'],
       moonPhase: json['astro']['moon_phase'],
       hours: hourList,
     );

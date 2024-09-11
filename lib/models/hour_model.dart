@@ -37,4 +37,10 @@ class Hour {
       isDay: json['is_day'] == 1,
     );
   }
+
+  String getIsDayBackground() {
+    return isDay
+        ? 'lib/assets/images/backgrounds/day.png'
+        : 'lib/assets/images/backgrounds/night.png';
+  }
 }

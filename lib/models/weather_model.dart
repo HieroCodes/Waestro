@@ -6,6 +6,7 @@ class Weather {
   final double feelslike;
   final DateTime date;
   final String icon;
+  final bool isDay;
   final List<Day> days;
 
   Weather({
@@ -14,6 +15,7 @@ class Weather {
     required this.feelslike,
     required this.date,
     required this.icon,
+    required this.isDay,
     required this.days,
   });
 
@@ -24,9 +26,16 @@ class Weather {
       feelslike: json['current']['feelslike_c'],
       date: DateTime.parse(json['location']['localtime']),
       icon: json['current']['condition']['icon'],
+      isDay: json['current']['is_day'] == 1,
       days: (json['forecast']['forecastday'] as List)
           .map((i) => Day.fromJson(i))
           .toList(),
     );
+  }
+
+  String getIsDayBackground() {
+    return isDay
+        ? 'lib/assets/images/backgrounds/day.png'
+        : 'lib/assets/images/backgrounds/night.png';
   }
 }

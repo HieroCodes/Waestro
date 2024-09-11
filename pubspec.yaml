@@ -31,3 +31,5 @@ flutter:
     - lib/assets/images/moon_phases/waning_gibbous.svg
     - lib/assets/images/moon_phases/third_quarter.svg
     - lib/assets/images/moon_phases/waning_crescent.svg
+    - lib/assets/images/backgrounds/night.png
+    - lib/assets/images/backgrounds/day.png
