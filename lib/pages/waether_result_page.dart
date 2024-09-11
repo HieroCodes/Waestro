@@ -73,8 +73,7 @@ class WeatherResultPage extends StatelessWidget {
 
                           // Date d'aujourd'hui
                           Text(
-                            DateFormat('dd MMMM, EEEE')
-                                .format(DateTime.now()), // Date formatée
+                            DateFormat('dd MMMM, EEE').format(DateTime.now()), // Date formatée avec jour abrégé
                             style: AppStyle.dateStyle, // Style pour la date
                           ),
                         ],

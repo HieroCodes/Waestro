@@ -16,7 +16,7 @@ class AppStyle {
   );
 
   static const TextStyle tempStyle = TextStyle(
-    fontSize: 64,
+    fontSize: 54,
     fontWeight: FontWeight.bold,
     color: primaryTextColor,
   );
