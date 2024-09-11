@@ -112,7 +112,7 @@ print(coord);
             ),
             // Positionner l'icône en bas de la page
             Positioned(
-              bottom: 20, // Distance du bas de la page
+              bottom: 40, // Distance du bas de la page
               left: 0,
               right: 0,
               child: Center(
