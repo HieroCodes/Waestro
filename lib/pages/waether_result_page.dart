@@ -11,46 +11,50 @@ class WeatherResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          AppStyle.backgroundColor, // Utilisation de la couleur de fond
+      backgroundColor: AppStyle.backgroundColor, // Utilisation de la couleur de fond
       appBar: AppBar(
         backgroundColor: Colors.transparent, // Rendre l'appbar transparent
-        iconTheme: IconThemeData(
-            color: AppStyle.primaryTextColor), // Couleur de l'icône
+        iconTheme: IconThemeData(color: AppStyle.primaryTextColor), // Couleur de l'icône
       ),
       body: Column(
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                // Titre principal
-                Text(
-                  weather.cityName,
-                  style:
-                      AppStyle.cityNameStyle, // Style pour le nom de la ville
-                ),
-                SizedBox(height: 10),
+                // Colonne pour la ville, la date et la température ressentie
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Titre principal - Ville
+                    Text(
+                      weather.cityName,
+                      style: AppStyle.cityNameStyle, // Style pour le nom de la ville
+                    ),
+                    SizedBox(height: 10),
 
-                // Température actuelle et ressenti
+                    // Date d'aujourd'hui
+                    Text(
+                      DateFormat('dd MMMM, EEEE').format(DateTime.now()), // Date formatée
+                      style: AppStyle.dateStyle, // Style pour la date
+                    ),
+                    SizedBox(height: 10),
+
+                    // Température ressentie
+                    Text(
+                      'Real feel ${weather.feelslike}°',
+                      style: AppStyle.realFeelStyle, // Style pour le ressenti
+                    ),
+                  ],
+                ),
+
+                Spacer(), // Espace flexible pour pousser la température à droite
+
+                // Température principale à droite
                 Text(
                   '${weather.temp}°',
                   style: AppStyle.tempStyle, // Style pour la température
                 ),
-                Text(
-                  'Real feel ${weather.feelslike}°',
-                  style: AppStyle.realFeelStyle, // Style pour le ressenti
-                ),
-                SizedBox(height: 20),
-
-                // Date d'aujourd'hui
-                Text(
-                  DateFormat('dd MMMM, EEEE')
-                      .format(DateTime.now()), // Date formatée
-                  style: AppStyle.dateStyle, // Style pour la date
-                ),
-                SizedBox(height: 20),
               ],
             ),
           ),
@@ -81,23 +85,18 @@ class WeatherResultPage extends StatelessWidget {
                           contentPadding: EdgeInsets.symmetric(vertical: 4.0),
                           title: Text(
                             '${DateFormat('dd MMMM').format(day.date)}', // Formatage de la date
-                            style: AppStyle
-                                .dayTitleStyle, // Style pour le titre du jour
+                            style: AppStyle.dayTitleStyle, // Style pour le titre du jour
                           ),
                           subtitle: Text(
                             'Max: ${day.maxTemp}°C - Min: ${day.minTemp}°C',
-                            style: AppStyle
-                                .daySubtitleStyle, // Style pour le sous-titre
+                            style: AppStyle.daySubtitleStyle, // Style pour le sous-titre
                           ),
                           trailing: Text(
                             day.condition, // Condition météo
-                            style: AppStyle
-                                .conditionStyle, // Style pour la condition météo
+                            style: AppStyle.conditionStyle, // Style pour la condition météo
                           ),
                         ),
-                        Divider(
-                            color:
-                                AppStyle.dividerColor), // Ligne de séparation
+                        Divider(color: AppStyle.dividerColor), // Ligne de séparation
                       ],
                     );
                   },
