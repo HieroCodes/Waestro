@@ -8,6 +8,7 @@ class Weather {
   final String icon;
   final bool isDay;
   final List<Day> days;
+  final String condition;
 
   Weather({
     required this.cityName,
@@ -17,6 +18,7 @@ class Weather {
     required this.icon,
     required this.isDay,
     required this.days,
+    required this.condition,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) {
@@ -30,6 +32,7 @@ class Weather {
       days: (json['forecast']['forecastday'] as List)
           .map((i) => Day.fromJson(i))
           .toList(),
+      condition: json['current']['condition']['text'],
     );
   }
 

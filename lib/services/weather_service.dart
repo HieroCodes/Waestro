@@ -2,7 +2,7 @@ import 'dart:convert';
 import '../models/weather_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart'; 
+import 'package:geocoding/geocoding.dart';
 
 class WeatherService {
   static const BASE_URL = 'http://api.weatherapi.com/v1/forecast.json?key=';
@@ -15,6 +15,7 @@ class WeatherService {
     final response = await http.get(Uri.parse('$BASE_URL$url'));
 
     if (response.statusCode == 200) {
+      print(response.body);
       return Weather.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load weather data');
@@ -52,7 +53,8 @@ class WeatherService {
         distanceFilter: 100, // Filtre de distance pour limiter les mises à jour
       ),
     );
+    String coords = '${position.latitude}, ${position.longitude}';
 
-    return position.toString();
+    return coords;
   }
 }

@@ -81,7 +81,7 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
                   filled: true,
                   fillColor: Colors.grey[850], // Couleur de fond du champ
                   prefixIcon: Icon(Icons.search, color: Colors.tealAccent), // Icône de recherche
-                  hintText: 'latitude, longitude', // Placeholder
+                  hintText: 'Ville / latitude, longitude', // Placeholder
                   hintStyle: TextStyle(color: Colors.white38), // Couleur du placeholder
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30), // Arrondir les coins

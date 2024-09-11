@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
+import 'package:waestro_mobile/models/weather_icons_model.dart';
 import 'package:waestro_mobile/services/weather_service.dart';
 import 'package:waestro_mobile/models/weather_model.dart';
 import 'package:waestro_mobile/components/weather_search_bar.dart';
@@ -17,10 +20,10 @@ class _WeatherPageState extends State<WeatherPage> {
   Weather? _weather;
 
   _fetchWeather() async {
-    //String cityName = await _weatherService.getcurrentCity();
-
+    String coord = await _weatherService.getcurrentCity();
+print(coord);
     try {
-      final weather = await _weatherService.getWeather("Paris");
+      final weather = await _weatherService.getWeather(coord);
 
       setState(() {
         _weather = weather;
@@ -39,6 +42,8 @@ class _WeatherPageState extends State<WeatherPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
         // Ce container enveloppe tout le contenu du Scaffold et applique le fond en dégradé
@@ -61,7 +66,7 @@ class _WeatherPageState extends State<WeatherPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const Padding(
-                    padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
+                    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                     child: Text(
                       "wa.",
                       style: TextStyle(
@@ -71,7 +76,7 @@ class _WeatherPageState extends State<WeatherPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 5),
                   LocationSearchBar(weatherService: _weatherService),
                   if (_weather != null)
                     Column(
@@ -87,9 +92,16 @@ class _WeatherPageState extends State<WeatherPage> {
                           '${_weather!.temp}°C',
                           style: TextStyle(fontSize: 24, color: Colors.white),
                         ),
-                        Image.network('https:${_weather!.icon}'),
+                        // Image.network('https:${_weather!.icon}'),
+                        SizedBox(
+                          height: screenHeight *
+                              0.25, 
+                          child: Lottie.asset(
+                              getCustomWeatherIcon(_weather!.condition)),
+                        ),
+
                         Text(
-                          '${_weather!.date}',
+                          DateFormat('dd MMMM, EEEE').format(_weather!.date),
                           style: TextStyle(fontSize: 24, color: Colors.white),
                         ),
                       ],
@@ -115,13 +127,4 @@ class _WeatherPageState extends State<WeatherPage> {
       ),
     );
   }
-
-
-
-
-
-
 }
-
-
-
