@@ -53,37 +53,75 @@ class _WeatherPageState extends State<WeatherPage> {
             tileMode: TileMode.mirror,
           ),
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              LocationSearchBar(weatherService: _weatherService),
-              if (_weather != null)
-                Column(
-                  children: <Widget>[
-                    Text(
-                      '${_weather!.cityName}',
+        child: Stack(
+          children: [
+            // Contenu principal centré
+            Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
+                    child: Text(
+                      "wa.",
                       style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.tealAccent,
+                      ),
                     ),
-                    Text(
-                      '${_weather!.temp}°C',
-                      style: TextStyle(fontSize: 24, color: Colors.white),
+                  ),
+                  const SizedBox(height: 20),
+                  LocationSearchBar(weatherService: _weatherService),
+                  if (_weather != null)
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          '${_weather!.cityName}',
+                          style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          '${_weather!.temp}°C',
+                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        ),
+                        Image.network('https:${_weather!.icon}'),
+                        Text(
+                          '${_weather!.date}',
+                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        ),
+                      ],
                     ),
-                    Image.network('https:${_weather!.icon}'),
-                    Text(
-                      '${_weather!.date}',
-                      style: TextStyle(fontSize: 24, color: Colors.white),
-                    ),
-                  ],
+                  if (_weather == null) CircularProgressIndicator(),
+                ],
+              ),
+            ),
+            // Positionner l'icône en bas de la page
+            Positioned(
+              bottom: 20, // Distance du bas de la page
+              left: 0,
+              right: 0,
+              child: Center(
+                child: IconButton(
+                  icon: Icon(Icons.search, size: 44, color: Colors.tealAccent),
+                  onPressed: _fetchWeather,
                 ),
-              if (_weather == null) CircularProgressIndicator(),
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
+
+
+
+
+
+
 }
+
+
+

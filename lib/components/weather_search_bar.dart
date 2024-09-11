@@ -58,7 +58,7 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
       child: Form(
         key: _formKey,
         child: Column(
