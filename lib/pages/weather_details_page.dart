@@ -88,7 +88,7 @@ class WeatherDetailsPage extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    '${weatherDay.maxTemp}',
+                                    '${weatherDay.hours.first.temp}',
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 55,
@@ -151,7 +151,7 @@ class WeatherDetailsPage extends StatelessWidget {
                                         height: 10,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: getDotColor(weatherDay.hours.first.windSpeed, 'wind'),
+                                          color: getDotColor(weatherDay.hours.first.cloud.toDouble(), 'cloud'),
                                         ),
                                       ),
                                     ],
@@ -178,7 +178,7 @@ class WeatherDetailsPage extends StatelessWidget {
                                         height: 10,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: getDotColor(weatherDay.hours.first.windSpeed, 'wind'),
+                                          color: getDotColor(weatherDay.hours.first.visibility, 'visibility'),
                                         ),
                                       ),
                                     ],
@@ -197,7 +197,7 @@ class WeatherDetailsPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        '${weatherDay.hours.first.precipitation ?? 'N/A'}%', // Moon Illumination (vérification si dispo)
+                                        '${weatherDay.moonIllumination}%', // Moon Illumination (vérification si dispo)
                                         style: AppStyle.realFeelStyle,
                                       ),
                                       const SizedBox(width: 8),
@@ -206,7 +206,7 @@ class WeatherDetailsPage extends StatelessWidget {
                                         height: 10,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: getDotColor(weatherDay.hours.first.windSpeed, 'wind'),
+                                          color: getDotColor(weatherDay.moonIllumination.toDouble(), 'moon_illumination'),
                                         ),
                                       ),
                                     ],
@@ -238,7 +238,7 @@ class WeatherDetailsPage extends StatelessWidget {
                                         height: 10,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: getDotColor(weatherDay.hours.first.windSpeed, 'wind'),
+                                          color: getDotColor(weatherDay.hours.first.humidity.toDouble(), 'humidity'),
                                         ),
                                       ),
                                     ],
@@ -265,7 +265,7 @@ class WeatherDetailsPage extends StatelessWidget {
                                         height: 10,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: getDotColor(weatherDay.hours.first.windSpeed, 'wind'),
+                                          color: getDotColor(weatherDay.hours.first.precipitation, 'precipitation'),
                                         ),
                                       ),
                                     ],
@@ -356,7 +356,9 @@ class WeatherDetailsPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 30,),
                                 SvgPicture.asset(
-                                  'lib/assets/images/forecast_hourly/half.svg', // Image SVG à afficher
+                                  weatherDay.hours.first.isDay 
+                                    ? 'lib/assets/images/forecast_hourly/full.svg' 
+                                    : weatherDay.getMoonPhaseImagePath(),
                                   height: 30,
                                   width: 30,
                                 ),
@@ -394,7 +396,9 @@ class WeatherDetailsPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 30,),
                                 SvgPicture.asset(
-                                  'lib/assets/images/forecast_hourly/full.svg', // Image SVG à afficher
+                                  weatherDay.hours[1].isDay 
+                                    ? 'lib/assets/images/forecast_hourly/full.svg' 
+                                    : weatherDay.getMoonPhaseImagePath(),
                                   height: 30,
                                   width: 30,
                                 ),
@@ -410,7 +414,7 @@ class WeatherDetailsPage extends StatelessWidget {
                                       width: 15,
                                       height: 4,
                                       decoration: BoxDecoration(
-                                        color: getDotColor(weatherDay.hours.first.temp.toDouble(), 'temp'),
+                                        color: getDotColor(weatherDay.hours[1].temp.toDouble(), 'temp'),
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                     ),
@@ -428,7 +432,9 @@ class WeatherDetailsPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 30,),
                                 SvgPicture.asset(
-                                  'lib/assets/images/forecast_hourly/full.svg', // Image SVG à afficher
+                                  weatherDay.hours[2].isDay 
+                                    ? 'lib/assets/images/forecast_hourly/full.svg' 
+                                    : weatherDay.getMoonPhaseImagePath(),
                                   height: 30,
                                   width: 30,
                                 ),
@@ -444,7 +450,7 @@ class WeatherDetailsPage extends StatelessWidget {
                                       width: 15,
                                       height: 4,
                                       decoration: BoxDecoration(
-                                        color: getDotColor(weatherDay.hours.first.temp.toDouble(), 'temp'),
+                                        color: getDotColor(weatherDay.hours[2].temp.toDouble(), 'temp'),
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                     ),
@@ -462,7 +468,9 @@ class WeatherDetailsPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 30,),
                                 SvgPicture.asset(
-                                  'lib/assets/images/forecast_hourly/full.svg', // Image SVG à afficher
+                                  weatherDay.hours[3].isDay 
+                                    ? 'lib/assets/images/forecast_hourly/full.svg' 
+                                    : weatherDay.getMoonPhaseImagePath(),
                                   height: 30,
                                   width: 30,
                                 ),
@@ -478,7 +486,7 @@ class WeatherDetailsPage extends StatelessWidget {
                                       width: 15,
                                       height: 4,
                                       decoration: BoxDecoration(
-                                        color: getDotColor(weatherDay.hours.first.temp.toDouble(), 'temp'),
+                                        color: getDotColor(weatherDay.hours[3].temp.toDouble(), 'temp'),
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                     ),
@@ -496,7 +504,9 @@ class WeatherDetailsPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 30,),
                                 SvgPicture.asset(
-                                  'lib/assets/images/forecast_hourly/full.svg', // Image SVG à afficher
+                                  weatherDay.hours[4].isDay 
+                                    ? 'lib/assets/images/forecast_hourly/full.svg' 
+                                    : weatherDay.getMoonPhaseImagePath(),
                                   height: 30,
                                   width: 30,
                                 ),
@@ -512,7 +522,7 @@ class WeatherDetailsPage extends StatelessWidget {
                                       width: 15,
                                       height: 4,
                                       decoration: BoxDecoration(
-                                        color: getDotColor(weatherDay.hours.first.temp.toDouble(), 'temp'),
+                                        color: getDotColor(weatherDay.hours[4].temp.toDouble(), 'temp'),
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                     ),

@@ -19,9 +19,9 @@ Color getDotColor(double value, String param) {
         return Colors.red;
       }
     case 'visibility':
-      if (value > 15) {
+      if (value >= 10) {
         return Colors.green;
-      } else if (value > 5) {
+      } else if (value >= 5) {
         return Colors.orange;
       } else {
         return Colors.red;
@@ -35,9 +35,9 @@ Color getDotColor(double value, String param) {
         return Colors.red;
       }
     case 'moon_illumination':
-      if (value > 50) {
+      if (value < 10) {
         return Colors.green;
-      } else if (value > 20) {
+      } else if (value < 80) {
         return Colors.orange;
       } else {
         return Colors.red;
@@ -49,6 +49,14 @@ Color getDotColor(double value, String param) {
         return Colors.green;  // Tempéré
       } else {
         return Colors.red;  // Chaud
+      }
+    case 'precipitation': // en mm
+      if (value < 1) {
+        return Colors.green;
+      } else if (value < 5) {
+        return Colors.orange;
+      } else {
+        return Colors.red;
       }
     default:
       return Colors.grey;
