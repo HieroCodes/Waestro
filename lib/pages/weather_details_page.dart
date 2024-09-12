@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:waestro_mobile/models/day_model.dart';
-import 'package:waestro_mobile/pages/weather_details_page.dart';
-import 'package:waestro_mobile/models/weather_model.dart';
 
 import '../styles/app_styles.dart';
 
-
 class WeatherDetailsPage extends StatelessWidget {
   final Day weatherDay;
+
   final String cityName;
 
   // Constructeur pour recevoir les données météo du jour
@@ -21,108 +19,175 @@ class WeatherDetailsPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              // Partie supérieure avec une image en arrière-plan
-              Container(
-                height: screenHeight * 0.6,
-                width: screenWidth,// 60% de la hauteur de l'écran
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/img/bg.png'),
-                    fit: BoxFit.cover,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent, // Rendre l'appbar transparent
+        iconTheme: IconThemeData(color: AppStyle.primaryTextColor), // Couleur de l'icône
+      ),
+      body: Column(
+        children: <Widget>[
+          // Utilisation d'un Container avec une hauteur de 40% de la hauteur totale de l'écran
+          Container(
+            height: screenHeight * 0.40,
+            width: screenWidth, // Assure que le Container ne dépasse pas la largeur de l'écran
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                children: [
+                  Expanded(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            cityName,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                                color: Colors.white
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            '${weatherDay.maxTemp}°C',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 50,
+                              color: Colors.white
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        ]
+
+                      )
                   ),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
+                  const SizedBox(height: 15),
+                  Expanded(
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              DateFormat('dd MMMM, EEEE').format(weatherDay.date),
+                              style: AppStyle.dateStyle,
+                            ),
+                          ]
+
+                      )
                   ),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Nom de la ville
-                    Text(
-                      cityName,
-                      style: AppStyle.cityNameStyle,
-                    ),
-                    const SizedBox(height: 10),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Total des nuages (cloud)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Total Cloud: ${weatherDay.hours.first.cloud}%', // Total Cloud
+                              style: AppStyle.realFeelStyle,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
 
-                    // Date de l'élément cliqué
-                    Text(
-                      DateFormat('dd MMMM, EEEE').format(weatherDay.date),
-                      style: AppStyle.dateStyle,
-                    ),
-                    const SizedBox(height: 10),
+                        // Visibilité (vis_km)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Visibility: ${weatherDay.hours.first.visibility} km', // Visibilité
+                              style: AppStyle.realFeelStyle,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
 
-                    // Température
-                    Text(
-                      '${weatherDay.maxTemp}°C', // Température maximale de la journée
-                      style: AppStyle.tempStyle,
-                    ),
-                    const SizedBox(height: 10),
+                        // Humidité (humidity)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Humidity: ${weatherDay.hours.first.humidity}%', // Humidité
+                              style: AppStyle.realFeelStyle,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
 
-                    // Visibilité
-                    Text(
-                      'Visibility: ${weatherDay.hours.first.visibility} km', // Visibilité
-                      style: AppStyle.realFeelStyle,
-                    ),
-                    const SizedBox(height: 10),
+                        // Précipitations (precip_mm)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Precipitation: ${weatherDay.hours.first.precipitation} mm', // Précipitations
+                              style: AppStyle.realFeelStyle,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
 
-                    // Humidité
-                    Text(
-                      'Humidity: ${weatherDay.hours.first.humidity}%', // Humidité
-                      style: AppStyle.realFeelStyle,
-                    ),
-                    const SizedBox(height: 10),
+                        // Moon Illumination (si disponible dans forecast)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Moon Illumination: ${weatherDay.moonIllumination ?? 'N/A'}%', // Moon Illumination (vérification si dispo)
+                              style: AppStyle.realFeelStyle,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
 
-                    // Vent
-                    Text(
-                      'Wind: ${weatherDay.hours.first.windSpeed} km/h', // Vitesse du vent
-                      style: AppStyle.realFeelStyle,
-                    ),
-                  ],
-                ),
-              ),
-
-              // Partie inférieure avec un fond dégradé
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xFF101010),
-                        Color(0xFF262837),
+                        // Vent (wind_kph)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Wind: ${weatherDay.hours.first.windSpeed} km/h', // Vents
+                              style: AppStyle.realFeelStyle,
+                            ),
+                          ],
+                        ),
                       ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
                     ),
                   ),
-                  child: Center(
-                    child: Text(
-                      'Contenu ici',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                ),
+
+
+
+                  Spacer(), // Espace flexible pour pousser la température à droite
+
+                  const SizedBox(height: 10),
+                ],
               ),
-            ],
+            ),
           ),
 
-          // AppBar en superposition à l'extrême gauche en haut
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              iconTheme: const IconThemeData(
-                color: AppStyle.primaryTextColor,
+          // Prévisions du jour et des jours suivants avec un fond en dégradé
+          Expanded(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment(-1, 1),
+                  colors: <Color>[
+                    Color(0xFF101010), // Couleur de début
+                    Color.fromARGB(255, 38, 40, 55), // Couleur de fin
+                  ],
+                  tileMode: TileMode.mirror, // Mode de tuile
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
+                child: Center(
+                  child: Text(
+                    'Contenu ici', // Exemple de contenu
+                    style: TextStyle(
+                      color: Colors.white, // Assurez-vous que le texte soit en blanc pour être visible
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -130,8 +195,4 @@ class WeatherDetailsPage extends StatelessWidget {
       ),
     );
   }
-
-
-
-
 }
