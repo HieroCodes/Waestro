@@ -24,7 +24,7 @@ class WeatherResultPage extends StatelessWidget {
             right: 0,
             child: Container(
               height: MediaQuery.of(context).size.height *
-                  0.40, // Limite à 40% de la hauteur de l'écran
+                  0.45, // Limite à 40% de la hauteur de l'écran
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
@@ -40,7 +40,7 @@ class WeatherResultPage extends StatelessWidget {
           Column(
             children: <Widget>[
               Container(
-                height: MediaQuery.of(context).size.height * 0.40,
+                height: MediaQuery.of(context).size.height * 0.45,
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.5),
                 ),
