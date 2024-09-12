@@ -37,7 +37,7 @@ class WeatherDetailsPage extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                      weather.getIsDayBackground()), // Image de fond du jour
+                      weatherDay.hours.first.getIsDayBackground()), // Image de fond du jour
                   fit: BoxFit
                       .cover, // Assure que l'image couvre tout le conteneur
                 ),
