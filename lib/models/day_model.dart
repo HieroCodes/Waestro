@@ -27,11 +27,16 @@ class Day {
     var hoursFromJson = json['hour'] as List;
     List<Hour> hourList = hoursFromJson.map((i) => Hour.fromJson(i)).toList();
 
+    String iconUrl = json['day']['condition']['icon'];
+    if (iconUrl.startsWith('//')) {
+      iconUrl = 'https:' + iconUrl;
+    }
+
     return Day(
       date: DateTime.parse(json['date']),
       maxTemp: json['day']['maxtemp_c'],
       minTemp: json['day']['mintemp_c'],
-      icon: json['day']['condition']['icon'],
+      icon: iconUrl,
       moonPhase: json['astro']['moon_phase'],
       //moonIllumination: json['astro']['moon_illumination'] ?? 'N/A',
       //cloudCover: json['day']['daily_chance_of_rain']?.toDouble() ?? 0.0,

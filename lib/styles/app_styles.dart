@@ -32,12 +32,12 @@ class AppStyle {
   );
 
   static const TextStyle dayTitleStyle = TextStyle(
-    fontSize: 18,
+    fontSize: 16,
     color: primaryTextColor,
   );
 
   static const TextStyle daySubtitleStyle = TextStyle(
-    fontSize: 16,
+    fontSize: 14,
     color: secondaryTextColor,
   );
 
