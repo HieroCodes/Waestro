@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Importez ce package pour afficher les SVG dans Flutter
 import 'package:intl/intl.dart';
 import 'package:waestro_mobile/models/weather_model.dart';
-import 'package:waestro_mobile/pages/weather_details_page.dart';
 import 'package:waestro_mobile/styles/app_styles.dart'; // Import de AppStyle
 
 class WeatherResultPage extends StatelessWidget {
