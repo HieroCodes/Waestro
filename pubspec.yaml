@@ -24,7 +24,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - img/
     - lib/assets/images/moon_phases/new_moon.svg
     - lib/assets/images/moon_phases/waxing_crescent.svg
     - lib/assets/images/moon_phases/first_quarter.svg

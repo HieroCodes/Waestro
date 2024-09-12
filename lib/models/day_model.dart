@@ -8,8 +8,8 @@ class Day {
   final double minTemp;
   final String icon;
   final String moonPhase;
-  final String moonIllumination;
-  final double cloudCover;
+  //final String moonIllumination;
+  //final double cloudCover;
   final List<Hour> hours;
 
   Day({
@@ -18,8 +18,8 @@ class Day {
     required this.minTemp,
     required this.icon,
     required this.moonPhase,
-    required this.moonIllumination,
-    required this.cloudCover,
+    //required this.moonIllumination,
+    //required this.cloudCover,
     required this.hours,
   });
 
@@ -33,8 +33,8 @@ class Day {
       minTemp: json['day']['mintemp_c'],
       icon: json['day']['condition']['icon'],
       moonPhase: json['astro']['moon_phase'],
-      moonIllumination: json['astro']['moon_illumination'] ?? 'N/A',
-      cloudCover: json['day']['daily_chance_of_rain']?.toDouble() ?? 0.0,
+      //moonIllumination: json['astro']['moon_illumination'] ?? 'N/A',
+      //cloudCover: json['day']['daily_chance_of_rain']?.toDouble() ?? 0.0,
       hours: hourList,
     );
   }

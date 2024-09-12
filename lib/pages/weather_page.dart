@@ -21,7 +21,7 @@ class _WeatherPageState extends State<WeatherPage> {
 
   _fetchWeather() async {
     String coord = await _weatherService.getcurrentCity();
-print(coord);
+    print(coord);
     try {
       final weather = await _weatherService.getWeather(coord);
 
@@ -95,7 +95,7 @@ print(coord);
                         // Image.network('https:${_weather!.icon}'),
                         SizedBox(
                           height: screenHeight *
-                              0.25, 
+                              0.25,
                           child: Lottie.asset(
                               getCustomWeatherIcon(_weather!.condition)),
                         ),
@@ -112,7 +112,7 @@ print(coord);
             ),
             // Positionner l'icône en bas de la page
             Positioned(
-              bottom: 40, // Distance du bas de la page
+              bottom: 20, // Distance du bas de la page
               left: 0,
               right: 0,
               child: Center(

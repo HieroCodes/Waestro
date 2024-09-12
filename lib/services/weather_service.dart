@@ -11,8 +11,10 @@ class WeatherService {
   WeatherService(this.apiKey);
 
   Future<Weather> getWeather(String cityName) async {
-    final url = '$apiKey&q=$cityName&days=6';
-    final response = await http.get(Uri.parse('$BASE_URL$url'));
+    //final url = '$apiKey&q=$cityName&days=6';
+    final url = '$BASE_URL$apiKey&q=$cityName&days=6';
+    final response = await http.get(Uri.parse(url));
+    //final response = await http.get(Uri.parse('$BASE_URL$url'));
 
     if (response.statusCode == 200) {
       print(response.body);

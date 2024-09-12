@@ -132,7 +132,7 @@ class WeatherDetailsPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Moon Illumination: ${weatherDay.moonIllumination ?? 'N/A'}%', // Moon Illumination (vérification si dispo)
+                              'Moon Illumination: ${weatherDay.hours.first.precipitation ?? 'N/A'}%', // Moon Illumination (vérification si dispo)
                               style: AppStyle.realFeelStyle,
                             ),
                           ],
