@@ -7,6 +7,7 @@ class Weather {
   final DateTime date;
   final String icon;
   final bool isDay;
+  final bool isMoon;
   final List<Day> days;
   final String condition;
 
@@ -17,6 +18,7 @@ class Weather {
     required this.date,
     required this.icon,
     required this.isDay,
+    required this.isMoon,
     required this.days,
     required this.condition,
   });
@@ -29,6 +31,7 @@ class Weather {
       date: DateTime.parse(json['location']['localtime']),
       icon: json['current']['condition']['icon'],
       isDay: json['current']['is_day'] == 1,
+      isMoon: json['current']['is_day'] == 1,
       days: (json['forecast']['forecastday'] as List)
           .map((i) => Day.fromJson(i))
           .toList(),
@@ -40,5 +43,11 @@ class Weather {
     return isDay
         ? 'lib/assets/images/backgrounds/day.png'
         : 'lib/assets/images/backgrounds/night.png';
+  }
+
+  String getMoonBackground() {
+    return isMoon
+        ? 'lib/assets/images/forecast_hourly/full.svg'
+        : 'lib/assets/images/forecast_hourly/half.svg';
   }
 }

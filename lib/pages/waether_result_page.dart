@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; 
 import 'package:intl/intl.dart';
-import 'package:waestro_mobile/models/weather_model.dart'; 
+import 'package:waestro_mobile/models/weather_model.dart';
+import 'package:waestro_mobile/pages/weather_details_page.dart';
 import 'package:waestro_mobile/styles/app_styles.dart'; 
 
 class WeatherResultPage extends StatelessWidget {
@@ -182,6 +183,18 @@ class WeatherResultPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              onTap: () {
+                                // Naviguer vers la page de détails avec les données de la journée sélectionnée
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => WeatherDetailsPage(
+                                        weatherDay: day,
+                                        weather: weather,
+                                    ), // Passer les données
+                                  ),
+                                );
+                              },
                             ),
 
                             // Ligne de séparation

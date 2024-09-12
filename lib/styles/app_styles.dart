@@ -45,4 +45,16 @@ class AppStyle {
     color: primaryTextColor,
   );
 
+  static const TextStyle detailsTitleStyle = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: primaryTextColor,
+  );
+
+  static const TextStyle ForecastHourlyTimeStyle = TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+      color: primaryTextColor,
+    );
+
 }
