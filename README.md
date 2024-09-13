@@ -16,5 +16,6 @@ Prévision sur 7 jours / Heure par heure pour avoir une estimation précise
 ##L’application va principalement parler aux astrophotographes qui peine à prévoir des sessions de photo puisque cela demande de réunir un tas de conditions météorologiques 
 que l’on ne trouve pas forcément de manière efficace et centralisée sur une même plateforme météo.
 
-# Illustrations
+# Screenshots
+![Screen1](https://github.com/user-attachments/assets/fcaaf80d-d26b-4d1e-a809-a36d5d6417a5)
 
