@@ -20,3 +20,9 @@ que l’on ne trouve pas forcément de manière efficace et centralisée sur une
 ### Screen 1 | HomePage
 ![Screen1](https://github.com/user-attachments/assets/fcaaf80d-d26b-4d1e-a809-a36d5d6417a5)
 
+### Screen 2 | ResultsPage
+![Screen2](https://github.com/user-attachments/assets/fd9c4916-05b2-49fe-938b-ff0a15580ae6)
+
+### Screen 3 | DetailsPage
+![Screen3](https://github.com/user-attachments/assets/1236dc6b-fc97-453d-81e6-6eee9a9b2598)
+
