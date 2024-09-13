@@ -17,6 +17,6 @@ Prévision sur 7 jours / Heure par heure pour avoir une estimation précise
 que l’on ne trouve pas forcément de manière efficace et centralisée sur une même plateforme météo.
 
 # Screenshots
-## Screen 1 | HomePage
+### Screen 1 | HomePage
 ![Screen1](https://github.com/user-attachments/assets/fcaaf80d-d26b-4d1e-a809-a36d5d6417a5)
 
