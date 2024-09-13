@@ -65,24 +65,34 @@ class WeatherDetailsPage extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(height: 15,),
-                                  Text(
-                                    weather.cityName,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30,
-                                        color: Colors.white
+                                  SizedBox(height: 1,),
+                                  Expanded(
+                                    child: RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: '${weather.cityName}\n',  // '\n' pour ajouter un saut de ligne
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 30,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          // Partie du texte pour la date
+                                          TextSpan(
+                                            text: DateFormat('EEE, dd MMMM').format(weatherDay.date),
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      overflow: TextOverflow.ellipsis, // Applique l'overflow si le texte dépasse
                                     ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Text(
-                                      DateFormat('EEE, dd MMMM').format(weatherDay.date),
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.white
-                                    ),
-                                  ),
+                                  )
+
                                 ],
                               ),
                               Row(

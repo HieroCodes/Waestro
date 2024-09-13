@@ -43,25 +43,33 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+    double keyboardHeight = MediaQuery.of(context).viewInsets.bottom; // Hauteur du clavier
 
     return Scaffold(
-      body: Container(
-        // Ce container enveloppe tout le contenu du Scaffold et applique le fond en dégradé
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment(-1, 1),
-            colors: <Color>[
-              Color(0xFF101010),
-              Color.fromARGB(255, 38, 40, 55),
-            ],
-            tileMode: TileMode.mirror,
+      resizeToAvoidBottomInset: true,
+      body: Stack(
+        children: [
+          // Utilisation de SizedBox.expand pour étendre le background sur toute la page
+          SizedBox.expand(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment(-1, 1),
+                  colors: <Color>[
+                    Color(0xFF101010),
+                    Color.fromARGB(255, 38, 40, 55),
+                  ],
+                  tileMode: TileMode.mirror,
+                ),
+              ),
+            ),
           ),
-        ),
-        child: Stack(
-          children: [
-            // Contenu principal centré
-            Center(
+
+          // Contenu défilable
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: keyboardHeight), // Ajoute de l'espace en bas quand le clavier est ouvert
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -84,47 +92,34 @@ class _WeatherPageState extends State<WeatherPage> {
                         Text(
                           '${_weather!.cityName}',
                           style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         Text(
                           '${_weather!.temp}°C',
                           style: TextStyle(fontSize: 24, color: Colors.white),
                         ),
-                        // Image.network('https:${_weather!.icon}'),
                         SizedBox(
-                          height: screenHeight *
-                              0.25,
-                          child: Lottie.asset(
-                              getCustomWeatherIcon(_weather!.condition)),
+                          height: screenHeight * 0.25,
+                          child: Lottie.asset(getCustomWeatherIcon(_weather!.condition)),
                         ),
-
                         Text(
                           DateFormat('dd MMMM, EEEE').format(_weather!.date),
-                          style: TextStyle(fontSize: 24, color: Colors.white),
+                          style: const TextStyle(fontSize: 24, color: Colors.white),
                         ),
                       ],
                     ),
-                  if (_weather == null) CircularProgressIndicator(),
+                  if (_weather == null) const CircularProgressIndicator(),
                 ],
               ),
             ),
-            // Positionner l'icône en bas de la page
-            Positioned(
-              bottom: 20, // Distance du bas de la page
-              left: 0,
-              right: 0,
-              child: Center(
-                child: IconButton(
-                  icon: Icon(Icons.search, size: 44, color: Colors.tealAccent),
-                  onPressed: _fetchWeather,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
+
+
 }
