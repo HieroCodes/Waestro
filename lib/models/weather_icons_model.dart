@@ -65,6 +65,6 @@ String getCustomWeatherIcon(String condition) {
       return "lib/assets/images/icons/foggy.json";
 
     default:
-      return "";
+      return "lib/assets/images/icons/sunny.json";
   }
 }
